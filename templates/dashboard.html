@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - Finance App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3>📊 Customer Dues Dashboard</h3>
+      <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+
+    <!-- Add Customer Form -->
+    <div class="card p-3 mb-4 shadow-sm">
+      <h5>Add New Customer</h5>
+      <form action="/add" method="POST" class="row">
+        <div class="col-md-4">
+          <input type="text" name="reg_no" class="form-control" placeholder="Registration Number" required>
+        </div>
+        <div class="col-md-4">
+          <input type="text" name="name" class="form-control" placeholder="Customer Name" required>
+        </div>
+        <div class="col-md-3">
+          <input type="number" name="amount" class="form-control" placeholder="Due Amount ₹" required>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-primary w-100">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Customer Table -->
+    <div class="card p-3 shadow-sm">
+      <h5>Customer List</h5>
+      <table class="table table-bordered table-hover mt-3">
+        <thead class="table-secondary">
+          <tr>
+            <th>Reg No</th>
+            <th>Name</th>
+            <th>Amount ₹</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if customers %}
+            {% for reg_no, customer in customers.items() %}
+              <tr>
+                <td>{{ customer.reg_no }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.amount }}</td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr><td colspan="3" class="text-center">No customer data found</td></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
